@@ -10,53 +10,33 @@ import {
   Text,
   Container,
 } from "@chakra-ui/react";
+import { useAppSelector } from "hooks/useStore";
+import { RootState } from "store/store";
 
 const List = () => {
+  const { list, status } = useAppSelector((state: RootState) => state.todo);
+
   return (
     <Container marginX={6} marginY={10} maxW="3xl">
       <SimpleGrid
         spacing={6}
         templateColumns="repeat(auto-fill, minmax(200px, 1fr))"
       >
-        <Card>
-          <CardHeader>
-            <Heading size="md"> Customer dashboard</Heading>
-          </CardHeader>
-          <CardBody>
-            <Text>
-              View a summary of all your customers over the last month.
-            </Text>
-          </CardBody>
-          <CardFooter>
-            <Button>View here</Button>
-          </CardFooter>
-        </Card>
-        <Card>
-          <CardHeader>
-            <Heading size="md"> Customer dashboard</Heading>
-          </CardHeader>
-          <CardBody>
-            <Text>
-              View a summary of all your customers over the last month.
-            </Text>
-          </CardBody>
-          <CardFooter>
-            <Button>View here</Button>
-          </CardFooter>
-        </Card>
-        <Card>
-          <CardHeader>
-            <Heading size="md"> Customer dashboard</Heading>
-          </CardHeader>
-          <CardBody>
-            <Text>
-              View a summary of all your customers over the last month.
-            </Text>
-          </CardBody>
-          <CardFooter>
-            <Button>View here</Button>
-          </CardFooter>
-        </Card>
+        {list.map((todo) => (
+          <Card key={todo.id}>
+            <CardHeader>
+              <Heading size="md"> Customer dashboard</Heading>
+            </CardHeader>
+            <CardBody>
+              <Text>
+                View a summary of all your customers over the last month.
+              </Text>
+            </CardBody>
+            <CardFooter>
+              <Button>View here</Button>
+            </CardFooter>
+          </Card>
+        ))}
       </SimpleGrid>
     </Container>
   );

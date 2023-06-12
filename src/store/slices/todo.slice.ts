@@ -1,12 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { ITodo } from "types";
+import { EStatus, ITodo } from "types";
 
 type InitialState = {
-  loading: boolean;
+  status: EStatus;
   list: ITodo[];
 };
 const initialState: InitialState = {
-  loading: false,
+  status: EStatus.init,
   list: [],
 };
 
