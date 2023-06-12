@@ -5,10 +5,11 @@ import { Home, Todo } from "pages";
 function App() {
   return (
     <BrowserRouter>
-      <Layout />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/:id" element={<Todo />} />
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="/:id" element={<Todo />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );
