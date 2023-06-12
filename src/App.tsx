@@ -1,12 +1,14 @@
-import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Layout } from "components";
+import { Home, Todo } from "pages";
 
 function App() {
   return (
     <BrowserRouter>
+      <Layout />
       <Routes>
-        <Route path="/" element={<div>List</div>} />
-        <Route path="/:id" element={<div>detail</div>} />
+        <Route path="/" element={<Home />} />
+        <Route path="/:id" element={<Todo />} />
       </Routes>
     </BrowserRouter>
   );
