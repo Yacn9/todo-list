@@ -6,18 +6,17 @@ const ENTITY = "/todo";
 
 const list = (): Promise<AxiosResponse<ITodo[]>> => APIService.get(`${ENTITY}`);
 
-const update = (id: number): Promise<ITodo> =>
-  APIService.patch(`${ENTITY}/${id}`);
-
-const changeStatus = (id: number, status: boolean): Promise<ITodo> =>
-  APIService.put(`${ENTITY}/${id}`);
+const changeStatus = (data: ITodo): Promise<AxiosResponse> =>
+  APIService.put(`${ENTITY}/${data.id}`, {
+    ...data,
+    completed: !data.completed,
+  });
 
 const del = (id: number): Promise<AxiosResponse> =>
   APIService.delete(`${ENTITY}/${id}`);
 
 export const TodoAPI = {
   list,
-  update,
   changeStatus,
   del,
 };

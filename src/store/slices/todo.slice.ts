@@ -27,6 +27,14 @@ export const deleteTodoAction = createAsyncThunk(
   }
 );
 
+export const updateTodoAction = createAsyncThunk(
+  "todo/updateTodoAction",
+  async (data: ITodo) => {
+    await TodoAPI.changeStatus(data);
+    return data.id;
+  }
+);
+
 const todoSlice = createSlice({
   name: "todo",
   initialState,
@@ -44,6 +52,13 @@ const todoSlice = createSlice({
     });
     builder.addCase(deleteTodoAction.fulfilled, (state, action) => {
       state.list = state.list.filter((value) => value.id !== action.payload);
+    });
+    builder.addCase(updateTodoAction.fulfilled, (state, action) => {
+      state.list = state.list.map((todo) =>
+        todo.id === action.payload
+          ? { ...todo, completed: !todo.completed }
+          : todo
+      );
     });
   },
 });

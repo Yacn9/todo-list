@@ -2,27 +2,6 @@
   "todo": [
     {
       "userId": 1,
-      "id": 1,
-      "title": "delectus aut autem",
-      "description": "delectus aut autem",
-      "completed": false
-    },
-    {
-      "userId": 1,
-      "id": 2,
-      "title": "quis ut nam facilis et officia qui",
-      "description": "delectus aut autem",
-      "completed": false
-    },
-    {
-      "userId": 1,
-      "id": 4,
-      "title": "et porro tempora",
-      "description": "delectus aut autem",
-      "completed": true
-    },
-    {
-      "userId": 1,
       "id": 5,
       "title": "laboriosam mollitia et enim quasi adipisci quia provident illum",
       "description": "delectus aut autem",
@@ -68,7 +47,7 @@
       "id": 12,
       "title": "ipsa repellendus fugit nisi",
       "description": "delectus aut autem",
-      "completed": true
+      "completed": false
     },
     {
       "userId": 1,
@@ -310,13 +289,6 @@
     },
     {
       "userId": 3,
-      "id": 47,
-      "title": "nam qui rerum fugiat accusamus",
-      "description": "delectus aut autem",
-      "completed": false
-    },
-    {
-      "userId": 3,
       "id": 48,
       "title": "sit reprehenderit omnis quia",
       "description": "delectus aut autem",
@@ -510,13 +482,6 @@
       "title": "occaecati adipisci est possimus totam",
       "description": "delectus aut autem",
       "completed": false
-    },
-    {
-      "userId": 4,
-      "id": 76,
-      "title": "sequi dolorem sed",
-      "description": "delectus aut autem",
-      "completed": true
     },
     {
       "userId": 4,

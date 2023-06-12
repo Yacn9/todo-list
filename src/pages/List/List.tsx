@@ -17,8 +17,12 @@ import {
 } from "@chakra-ui/react";
 import { useAppDispatch, useAppSelector } from "hooks/useStore";
 import { RootState } from "store/store";
-import { deleteTodoAction, getTodoListAction } from "store/slices/todo.slice";
-import { EStatus } from "types";
+import {
+  deleteTodoAction,
+  getTodoListAction,
+  updateTodoAction,
+} from "store/slices/todo.slice";
+import { EStatus, ITodo } from "types";
 
 const List = () => {
   const toast = useToast();
@@ -35,15 +39,15 @@ const List = () => {
         isClosable: true,
       });
     }
-  }, [dispatch]);
+  }, [dispatch, toast]);
 
-  const onSubmit = () => {};
-
-  const onChange = (id: number, type: "update" | "delete") => {
+  const onChange = (data: ITodo, type: "update" | "delete") => {
     try {
-      type === "delete" ? dispatch(deleteTodoAction(id)) : console.log(1);
+      type === "delete"
+        ? dispatch(deleteTodoAction(data.id))
+        : dispatch(updateTodoAction(data));
       toast({
-        title: `task ${id} ${type === "delete" ? "deleted" : "updated"}`,
+        title: `task ${data.id} ${type === "delete" ? "deleted" : "updated"}`,
         position: "top-right",
         status: "success",
         isClosable: true,
@@ -73,19 +77,17 @@ const List = () => {
               <Divider />
               <CardFooter>
                 <ButtonGroup spacing="2">
-                  <Button variant="ghost" colorScheme="blue">
-                    Update
-                  </Button>
                   <Button
                     variant="solid"
                     colorScheme={todo.completed ? "orange" : "green"}
+                    onClick={() => onChange(todo, "update")}
                   >
                     {todo.completed ? "UNDONE" : "DONE"}
                   </Button>
                   <Button
                     variant="ghost"
                     colorScheme="red"
-                    onClick={() => onChange(todo.id, "delete")}
+                    onClick={() => onChange(todo, "delete")}
                   >
                     Delete
                   </Button>
