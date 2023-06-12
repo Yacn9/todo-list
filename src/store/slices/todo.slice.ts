@@ -1,4 +1,5 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { TodoAPI } from "api";
 import { EStatus, ITodo } from "types";
 
 type InitialState = {
@@ -10,15 +11,41 @@ const initialState: InitialState = {
   list: [],
 };
 
+export const getTodoListAction = createAsyncThunk(
+  "todo/getTodoListAction",
+  async () => {
+    const res = await TodoAPI.list();
+    return res.data;
+  }
+);
+
+export const deleteTodoAction = createAsyncThunk(
+  "todo/deleteTodoAction",
+  async (id: number) => {
+    await TodoAPI.del(id);
+    return id;
+  }
+);
+
 const todoSlice = createSlice({
   name: "todo",
   initialState,
-  reducers: {
-    setList: (state, action: PayloadAction<ITodo[]>) => {
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(getTodoListAction.pending, (state) => {
+      state.status = EStatus.loading;
+    });
+    builder.addCase(getTodoListAction.rejected, (state) => {
+      state.status = EStatus.error;
+    });
+    builder.addCase(getTodoListAction.fulfilled, (state, action) => {
+      state.status = EStatus.success;
       state.list = action.payload;
-    },
+    });
+    builder.addCase(deleteTodoAction.fulfilled, (state, action) => {
+      state.list = state.list.filter((value) => value.id !== action.payload);
+    });
   },
 });
 
-export const { setList } = todoSlice.actions;
 export default todoSlice.reducer;
