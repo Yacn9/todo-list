@@ -12,3 +12,5 @@ export enum EStatus {
   success,
   init,
 }
+
+export type TNewTask = Omit<ITodo, "userId" | "id" | "completed">;
